@@ -700,7 +700,7 @@ function showToast(msg, err) {
 }
 
 /* SUBMIT */
-function handleSubmit() {
+async function handleSubmit() {
   const name     = document.getElementById('f-name').value.trim();
   const jamb     = document.getElementById('f-jamb').value.trim();
   const whatsapp = document.getElementById('f-whatsapp').value.trim();
@@ -715,12 +715,20 @@ function handleSubmit() {
   if (selectedSubjects.length !== 3) { showToast('Please select your 3 UTME subjects', true); return; }
 
   const btn = document.getElementById('btn-submit');
-  btn.classList.add('loading');
-  setTimeout(() => {
-    btn.classList.remove('loading');
-    showModal({ name, jamb, dept: selectedDept, whatsapp, email, subjects: selectedSubjects });
-  }, 1000);
+btn.classList.add('loading');
+
+try {
+  await fetch('/api/send', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, jamb, dept: selectedDept, whatsapp, email, subjects: selectedSubjects }),
+  });
+} catch (err) {
+  console.warn('Email error:', err);
 }
+
+btn.classList.remove('loading');
+showModal({ name, jamb, dept: selectedDept, whatsapp, email, subjects: selectedSubjects });
 
 initDept();
 initSubjects();
