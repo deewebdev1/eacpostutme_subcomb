@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EAC Services Ltd — Post-UTME Subject Combination Verification Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --orange:    #F47920;
+  --orange-dk: #D96A10;
+  --orange-lt: #FFF3E8;
+  --black:     #111111;
+  --charcoal:  #1A1A1A;
+  --dark:      #2D2D2D;
+  --white:     #FFFFFF;
+  --smoke:     #F5F5F5;
+  --border:    #E5E7EB;
+  --muted:     #6B7280;
+  --success:   #16A34A;
+  --font-d: 'Barlow Condensed', sans-serif;
+  --font-b: 'Barlow', system-ui, sans-serif;
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.09);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-b);background:var(--smoke);color:var(--charcoal);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* HEADER */
+.header{
+  background:var(--black);
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  position:sticky;top:0;z-index:50;
+  border-bottom:3px solid var(--orange);
+}
+.header-brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1;}
+.header-logo{height:36px;width:auto;object-fit:contain;flex-shrink:0;}
+.header-text{display:flex;flex-direction:column;min-width:0;overflow:hidden;}
+.header-text-main{
+  font-family:var(--font-d);font-weight:800;color:var(--white);
+  letter-spacing:0.05em;text-transform:uppercase;white-space:nowrap;
+  line-height:1.1;font-size:clamp(0.8rem,2.5vw,1rem);
+}
+.header-text-sub{
+  font-size:clamp(0.58rem,1.5vw,0.68rem);font-weight:600;color:var(--orange);
+  letter-spacing:0.05em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.header-pill{
+  background:var(--orange);color:var(--white);
+  font-family:var(--font-d);font-size:0.75rem;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-left:10px;
+}
+
+/* HERO */
+.hero{
+  background:var(--black);
+  padding:48px 20px 80px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:600px;height:320px;
+  background:radial-gradient(ellipse,rgba(244,121,32,0.16) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1.5px solid rgba(244,121,32,0.45);border-radius:20px;padding:5px 16px;
+  font-size:0.72rem;font-weight:700;color:var(--orange);
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px;
+}
+.hero-tag svg{width:13px;height:13px;}
+.hero-brand{
+  font-family:var(--font-d);font-size:clamp(0.85rem,2vw,1rem);
+  font-weight:700;color:rgba(255,255,255,0.45);
+  letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;
+}
+.hero-h1{
+  font-family:var(--font-d);font-size:clamp(2rem,5.5vw,3.4rem);
+  font-weight:800;color:var(--white);line-height:1.05;
+  text-transform:uppercase;letter-spacing:0.02em;
+  max-width:640px;margin:0 auto 10px;
+}
+.hero-h1 em{color:var(--orange);font-style:normal;}
+.hero-h2{
+  font-family:var(--font-d);font-size:clamp(1rem,2.5vw,1.3rem);
+  font-weight:700;color:rgba(255,255,255,0.55);
+  text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;
+}
+.hero-p{font-size:0.88rem;color:rgba(255,255,255,0.45);max-width:400px;margin:0 auto;line-height:1.65;}
+
+/* MAIN */
+.main{max-width:620px;margin:-36px auto 60px;padding:0 16px;position:relative;z-index:2;}
+
+/* CARD */
+.card{background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);overflow:hidden;}
+.card-head{
+  background:var(--charcoal);padding:18px 28px;
+  display:flex;align-items:center;gap:12px;
+  border-bottom:3px solid var(--orange);
+}
+.card-head-icon{
+  width:38px;height:38px;background:rgba(244,121,32,0.15);
+  border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;
+  color:var(--orange);flex-shrink:0;
+}
+.card-head-icon svg{width:20px;height:20px;}
+.card-head-title{font-family:var(--font-d);font-size:1.1rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.04em;}
+.card-head-sub{font-size:0.74rem;color:rgba(255,255,255,0.5);margin-top:2px;}
+.card-body{padding:28px;}
+
+/* FIELDS */
+.field{margin-bottom:20px;}
+.field label{display:block;font-size:0.78rem;font-weight:700;color:var(--charcoal);margin-bottom:7px;text-transform:uppercase;letter-spacing:0.05em;}
+.field label span{color:var(--orange);}
+.field input{
+  width:100%;padding:12px 14px;
+  border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-family:var(--font-b);font-size:0.9rem;color:var(--charcoal);
+  background:var(--white);outline:none;transition:border-color 0.2s,box-shadow 0.2s;
+}
+.field input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(244,121,32,0.1);}
+.field input::placeholder{color:#C0C7D0;}
+
+/* SEARCHABLE SELECT */
+.ss-wrap{position:relative;}
+.ss-input{
+  width:100%;padding:12px 38px 12px 14px;
+  border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-family:var(--font-b);font-size:0.9rem;color:var(--charcoal);
+  background:var(--white);cursor:pointer;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.ss-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(244,121,32,0.1);}
+.ss-chevron{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;transition:transform 0.2s;}
+.ss-chevron svg{width:16px;height:16px;display:block;}
+.ss-wrap.open .ss-chevron{transform:translateY(-50%) rotate(180deg);}
+.ss-drop{
+  display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;
+  background:var(--white);border:1.5px solid var(--border);
+  border-radius:var(--r-sm);box-shadow:0 8px 28px rgba(0,0,0,0.12);
+  z-index:100;max-height:260px;overflow:hidden;flex-direction:column;
+}
+.ss-wrap.open .ss-drop{display:flex;}
+.ss-search-box{padding:10px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.ss-search-box input{
+  width:100%;border:1.5px solid var(--border);border-radius:6px;
+  padding:8px 10px;font-family:var(--font-b);font-size:0.85rem;outline:none;color:var(--charcoal);
+}
+.ss-search-box input:focus{border-color:var(--orange);}
+.ss-list{overflow-y:auto;flex:1;}
+.ss-opt{padding:10px 14px;font-size:0.875rem;color:var(--charcoal);cursor:pointer;transition:background 0.15s;}
+.ss-opt:hover{background:var(--smoke);}
+.ss-opt.selected{background:rgba(244,121,32,0.07);font-weight:700;color:var(--orange);}
+.ss-opt.hidden{display:none;}
+.ss-empty{padding:14px;font-size:0.85rem;color:var(--muted);text-align:center;display:none;}
+
+/* SUBJECT PICKER */
+.subject-note{font-size:0.78rem;color:var(--muted);margin-bottom:10px;line-height:1.55;}
+.subject-search{
+  width:100%;padding:9px 12px;border:1.5px solid var(--border);
+  border-radius:var(--r-sm);font-family:var(--font-b);font-size:0.85rem;
+  outline:none;color:var(--charcoal);margin-bottom:10px;
+  transition:border-color 0.2s;
+}
+.subject-search:focus{border-color:var(--orange);}
+.subject-search::placeholder{color:#C0C7D0;}
+.subject-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:220px;overflow-y:auto;padding-right:2px;}
+.s-chip{
+  display:flex;align-items:center;gap:8px;padding:9px 12px;
+  border:1.5px solid var(--border);border-radius:var(--r-sm);
+  cursor:pointer;transition:border-color 0.2s,background 0.2s;
+  font-size:0.82rem;color:var(--charcoal);user-select:none;
+}
+.s-chip:hover{border-color:var(--orange);background:var(--orange-lt);}
+.s-chip.selected{border-color:var(--orange);background:rgba(244,121,32,0.08);color:#7A3D00;font-weight:600;}
+.s-chip.disabled{opacity:0.35;cursor:not-allowed;pointer-events:none;}
+.s-chip.hidden{display:none;}
+.chip-box{
+  width:16px;height:16px;border:1.5px solid var(--border);border-radius:4px;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s,border-color 0.2s;
+}
+.s-chip.selected .chip-box{background:var(--orange);border-color:var(--orange);}
+.chip-box svg{width:10px;height:10px;color:var(--white);display:none;}
+.s-chip.selected .chip-box svg{display:block;}
+.subject-count{font-size:0.76rem;font-weight:600;color:var(--muted);margin-top:8px;}
+.subject-count span{color:var(--orange);}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:24px 0;}
+
+/* BTN */
+.btn-submit{
+  width:100%;padding:15px 20px;background:var(--orange);color:var(--white);
+  border:none;border-radius:var(--r-sm);
+  font-family:var(--font-d);font-size:1.1rem;font-weight:800;
+  letter-spacing:0.05em;text-transform:uppercase;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:background 0.2s,transform 0.15s;margin-top:8px;
+}
+.btn-submit:hover{background:var(--orange-dk);transform:translateY(-1px);}
+.btn-submit:active{transform:translateY(0);}
+.btn-submit.loading{opacity:0.7;pointer-events:none;}
+.spinner{width:20px;height:20px;border:2.5px solid rgba(255,255,255,0.35);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none;}
+.btn-submit.loading .spinner{display:block;}
+.btn-submit.loading .btn-lbl{display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.form-note{font-size:0.75rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.55;}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:200;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
+.overlay.active{display:flex;}
+@media(min-width:600px){.overlay{align-items:center;padding:24px;}}
+.modal{
+  background:var(--white);width:100%;max-width:540px;
+  border-radius:var(--r-lg) var(--r-lg) 0 0;
+  overflow:hidden;max-height:94vh;overflow-y:auto;
+  transform:translateY(50px);opacity:0;
+  transition:transform 0.35s cubic-bezier(.4,0,.2,1),opacity 0.35s;
+}
+@media(min-width:600px){.modal{border-radius:var(--r-lg);transform:translateY(20px) scale(0.97);}}
+.overlay.active .modal{transform:translateY(0) scale(1);opacity:1;}
+
+.modal-top{
+  background:var(--black);padding:28px 28px 22px;position:relative;
+  border-bottom:3px solid var(--orange);
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  width:32px;height:32px;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.6);transition:background 0.2s;
+}
+.modal-close:hover{background:rgba(255,255,255,0.18);}
+.modal-close svg{width:14px;height:14px;}
+.modal-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(244,121,32,0.15);border:1px solid rgba(244,121,32,0.35);
+  border-radius:20px;padding:4px 12px;
+  font-size:0.7rem;font-weight:700;color:var(--orange);
+  letter-spacing:0.07em;text-transform:uppercase;margin-bottom:14px;
+}
+.modal-badge svg{width:12px;height:12px;}
+.modal-greeting{font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:3px;}
+.modal-name{font-family:var(--font-d);font-size:1.5rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:12px;}
+.modal-pills{display:flex;flex-wrap:wrap;gap:7px;}
+.modal-pill{
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  border-radius:20px;padding:4px 12px;
+  font-size:0.73rem;color:rgba(255,255,255,0.75);
+  display:flex;align-items:center;gap:5px;
+}
+.modal-pill svg{width:11px;height:11px;}
+
+.modal-body{padding:24px 28px;}
+.combo-label{
+  font-family:var(--font-d);font-size:0.8rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:12px;
+}
+
+/* SUBJECT BLOCKS */
+.block{margin-bottom:16px;}
+.block-header{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--charcoal);border-radius:var(--r-sm) var(--r-sm) 0 0;
+  padding:10px 14px;
+}
+.block-title{font-family:var(--font-d);font-size:0.82rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.06em;}
+.block-badge{
+  background:var(--orange);color:var(--white);
+  font-family:var(--font-d);font-size:0.72rem;font-weight:700;
+  padding:2px 10px;border-radius:10px;letter-spacing:0.04em;
+}
+.block-subjects{border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--r-sm) var(--r-sm);overflow:hidden;}
+.combo-row{
+  display:flex;align-items:center;gap:12px;padding:11px 14px;
+  font-size:0.88rem;font-weight:600;border-bottom:1px solid var(--border);
+}
+.combo-row:last-child{border-bottom:none;}
+.combo-row.fixed{color:#7A3D00;background:rgba(244,121,32,0.06);}
+.combo-row.variable{color:var(--charcoal);background:var(--white);}
+.combo-num{
+  width:24px;height:24px;border-radius:50%;
+  font-size:0.72rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.combo-row.fixed .combo-num{background:var(--orange);color:var(--white);}
+.combo-row.variable .combo-num{background:var(--charcoal);color:var(--white);}
+
+.combo-note{
+  background:var(--smoke);border-left:3px solid var(--orange);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:12px 16px;font-size:0.82rem;color:var(--charcoal);
+  line-height:1.65;margin-bottom:20px;
+}
+
+/* PROMO */
+.promo{background:var(--black);border-radius:var(--r-md);padding:22px;margin-bottom:20px;}
+.promo-eye{font-size:0.7rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.promo-title{font-family:var(--font-d);font-size:1.2rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:4px;}
+.promo-sub{font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:16px;}
+.promo-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.promo-list li{display:flex;align-items:center;gap:9px;font-size:0.82rem;color:rgba(255,255,255,0.82);}
+.promo-list li svg{width:14px;height:14px;color:var(--orange);flex-shrink:0;}
+.promo-btn{
+  width:100%;padding:13px 20px;background:var(--orange);color:var(--white);
+  border:none;border-radius:var(--r-sm);
+  font-family:var(--font-d);font-size:0.95rem;font-weight:800;
+  letter-spacing:0.04em;text-transform:uppercase;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background 0.2s;
+}
+.promo-btn:hover{background:var(--orange-dk);}
+.promo-btn svg{width:16px;height:16px;}
+
+.email-notice{
+  background:#EDFBF3;border:1px solid #B6EDD1;border-radius:var(--r-sm);
+  padding:12px 14px;display:flex;align-items:flex-start;gap:10px;
+  font-size:0.8rem;color:#1A5C3A;line-height:1.55;
+}
+.email-notice svg{width:16px;height:16px;color:var(--success);flex-shrink:0;margin-top:1px;}
+
+/* FOOTER */
+footer{text-align:center;padding:28px 16px;font-size:0.76rem;color:var(--muted);border-top:1px solid var(--border);background:var(--white);}
+footer strong{color:var(--charcoal);}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--charcoal);color:var(--white);
+  padding:11px 22px;border-radius:24px;
+  font-size:0.84rem;font-weight:600;z-index:500;
+  transition:transform 0.3s cubic-bezier(.4,0,.2,1);white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.err{background:#DC2626;}
+
+@media(max-width:480px){
+  .card-body,.modal-body{padding:20px;}
+  .modal-top{padding:22px 20px 18px;}
+  .subject-grid{grid-template-columns:1fr;}
+}
+@media(max-width:360px){.header-text-sub{display:none;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-brand">
+    <img src="./logo.png" alt="EAC Logo" class="header-logo"/>
+    <div class="header-text">
+      <div class="header-text-main">EAC Services Ltd</div>
+      <div class="header-text-sub">Post-UTME Subject Combination Verification Portal</div>
+    </div>
+  </div>
+  <div class="header-pill">UNILAG 2026</div>
+</header>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+    Official Verification Portal
+  </div>
+  <div class="hero-brand">EAC Services Ltd</div>
+  <h1 class="hero-h1">Post-UTME Subject Combination <em>Verification</em></h1>
+  <p class="hero-h2">For UNILAG 2026 Aspirants</p>
+  <p class="hero-p">Enter your JAMB UTME subjects below. We'll calculate your exact Post-UTME combination instantly.</p>
+</section>
+
+<main class="main">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-head-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+      </div>
+      <div>
+        <div class="card-head-title">Candidate Information</div>
+        <div class="card-head-sub">All fields are required</div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="field">
+        <label>Full Name <span>*</span></label>
+        <input type="text" id="f-name" placeholder="Enter your full name" autocomplete="off"/>
+      </div>
+
+      <div class="field">
+        <label>JAMB Registration Number <span>*</span></label>
+        <input type="text" id="f-jamb" placeholder="e.g. 12345678AB" autocomplete="off" style="text-transform:uppercase;"/>
+      </div>
+
+      <div class="field">
+        <label>Department / Course of Study <span>*</span></label>
+        <div class="ss-wrap" id="dept-wrap">
+          <input type="text" class="ss-input" id="dept-display" placeholder="Search and select your department..." readonly/>
+          <div class="ss-chevron">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+          </div>
+          <div class="ss-drop" id="dept-drop">
+            <div class="ss-search-box"><input type="text" id="dept-search" placeholder="Type to search..."/></div>
+            <div class="ss-list" id="dept-list"></div>
+            <div class="ss-empty" id="dept-empty">No department found</div>
+          </div>
+        </div>
+        <input type="hidden" id="f-dept"/>
+      </div>
+
+      <div class="field">
+        <label>WhatsApp Number <span>*</span></label>
+        <input type="tel" id="f-whatsapp" placeholder="e.g. 08012345678"/>
+      </div>
+
+      <div class="field">
+        <label>Email Address <span>*</span></label>
+        <input type="email" id="f-email" placeholder="Enter your email address"/>
+      </div>
+
+      <div class="field">
+        <label>Your 4 JAMB UTME Subjects <span>*</span></label>
+        <p class="subject-note">Select the exact 4 subjects you wrote in your JAMB UTME exam. Use of English is compulsory and already included — select the remaining 3 subjects you chose.</p>
+        <input type="text" class="subject-search" id="subj-search" placeholder="Search subjects..."/>
+        <div class="subject-grid" id="subj-grid"></div>
+        <div class="subject-count">Selected: <span id="subj-count">0</span> / 3</div>
+      </div>
+
+      <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+        <div class="spinner"></div>
+        <span class="btn-lbl" style="display:flex;align-items:center;gap:10px;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>
+          See My Subject Combination
+        </span>
+      </button>
+      <p class="form-note">Your details are sent to EAC Services Ltd for record purposes only.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <strong>EAC Services Ltd</strong> &mdash; Post-UTME Subject Combination Verification Portal &mdash; UNILAG 2026
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-top">
+      <button class="modal-close" onclick="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="modal-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+        Combination Verified
+      </div>
+      <div class="modal-greeting">Hello,</div>
+      <div class="modal-name" id="m-name">—</div>
+      <div class="modal-pills">
+        <div class="modal-pill">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"/></svg>
+          <span id="m-jamb">—</span>
+        </div>
+        <div class="modal-pill">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"/></svg>
+          <span id="m-dept">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="combo-label">Your Post-UTME Subject Combination (40 Questions Total)</div>
+
+      <!-- Fixed Block -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-title">Fixed Subjects</div>
+          <div class="block-badge">25 Questions</div>
+        </div>
+        <div class="block-subjects">
+          <div class="combo-row fixed"><div class="combo-num">1</div><span>English Language</span></div>
+          <div class="combo-row fixed"><div class="combo-num">2</div><span>Mathematics</span></div>
+          <div class="combo-row fixed"><div class="combo-num">3</div><span>General Knowledge</span></div>
+        </div>
+      </div>
+
+      <!-- Variable Block -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-title">Your UTME Subjects</div>
+          <div class="block-badge" id="m-var-badge">15 Questions</div>
+        </div>
+        <div class="block-subjects" id="m-var-subjects"></div>
+      </div>
+
+      <div class="combo-note" id="m-note"></div>
+
+      <div class="promo">
+        <div class="promo-eye">Join EAC Tutorials — The Redemption '26</div>
+        <div class="promo-title">Preparing for UNILAG Post-UTME?</div>
+        <div class="promo-sub">Getting the right combination is just the first step. Score high enough to secure admission.</div>
+        <ul class="promo-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Intensive Post-UTME preparation</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Past questions and likely questions</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Daily classes and mock examinations</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Expert tutors and admission guidance</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>A community of serious UNILAG aspirants</li>
+        </ul>
+        <button class="promo-btn" onclick="window.open('https://wa.me/2349136379483','_blank')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg>
+          Register Now — Message EAC (09136379483)
+        </button>
+      </div>
+
+      <div class="email-notice">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+        A full copy of your subject combination has been sent to your email address. Check your inbox or spam folder.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════
+   JAMB SUBJECTS (excluding Use of English — already fixed)
+═══════════════════ */
+const JAMB_SUBJECTS = [
+  "Mathematics","Biology","Chemistry","Physics","Agriculture",
+  "Economics","Commerce","Accounting","Government","History",
+  "Geography","Literature in English","Christian Religious Studies / Islamic Religious Studies","Financial Accounting","Arabic","French","Yoruba","Igbo","Hausa",
+  "Fine Art","Music","Physical Education","Technical Drawing","Home Economics"
+].sort();
+
+/* Fixed subjects that get absorbed into the 25 */
+const FIXED = ["English Language","Mathematics","General Knowledge"];
+
+/* DEPT LIST */
+const DEPTS = [
+  "Accounting","Acting / Theatre Arts","Adult Education","Agricultural Economics",
+  "Agricultural Science","Architecture","Biochemistry","Botany","Building",
+  "Business Administration","Cell Biology & Genetics","Chemical Engineering",
+  "Chemistry","Civil Engineering","Communication & Language Arts",
+  "Computer Engineering","Computer Science","Creative Arts","Dentistry",
+  "Early Childhood Education","Economics","Education & Biology",
+  "Education & Chemistry","Education & Economics","Education & English",
+  "Education & Mathematics","Education & Physics","Electrical & Electronics Engineering",
+  "English Language","Environmental Biology","Estate Management","Fine Art",
+  "Food Science & Technology","French","Geography","Geology","German",
+  "Guidance & Counselling","History & Strategic Studies","Human Anatomy",
+  "Human Kinetics & Health Education","Industrial Chemistry","Industrial Mathematics",
+  "Industrial Relations & Personnel Management","Information Systems","Insurance",
+  "International Relations","Islamic Studies","Law","Library & Information Science",
+  "Linguistics & African Languages","Marine Biology","Mass Communication",
+  "Mathematics","Mechanical Engineering","Medical Laboratory Science",
+  "Medicine & Surgery","Microbiology","Music","Nursing Science",
+  "Petroleum & Gas Engineering","Philosophy","Physics","Physiology",
+  "Political Science","Portuguese","Psychology","Public Administration",
+  "Quantity Surveying","Radiography","Russian","Social Work","Sociology",
+  "Soil Science","Spanish","Statistics","Surveying & Geoinformatics",
+  "Systems Engineering","Urban & Regional Planning","Veterinary Medicine","Zoology"
+].sort();
+
+let selectedDept = '';
+let selectedSubjects = [];
+
+
+/* ═══════════════════════════════════════
+   SUBJECT CATEGORIES
+═══════════════════════════════════════ */
+const ARTS_POOL = ["Literature in English","History","Government",
+  "Christian Religious Studies / Islamic Religious Studies",
+  "French","Yoruba","Igbo","Hausa","Arabic","Music","Fine Art"];
+const SOC_POOL  = ["Economics","Commerce","Geography","Government","Financial Accounting"];
+const SCI_POOL  = ["Biology","Chemistry","Physics","Mathematics","Agricultural Science","Technical Drawing"];
+const ALL_POOL  = [...new Set([...ARTS_POOL,...SOC_POOL,...SCI_POOL,"Home Economics","Physical Education"])];
+
+/* ═══════════════════════════════════════
+   DEPARTMENT VALIDATION RULES (from UNILAG 2025/2026 Admission Requirements)
+   required  → subjects that MUST all be in the selection
+   pool      → all selections must come from this list (empty = anything goes)
+   forbidden → subjects explicitly NOT accepted
+   msg       → shown to the student when wrong
+═══════════════════════════════════════ */
+const DEPT_RULES = {
+  // ── ARTS ──────────────────────────────
+  "Acting / Theatre Arts":     { required: [], pool: ALL_POOL, msg: "Theatre Arts accepts Fine Art, Literature in English, Music plus any Arts or Social Sciences subject." },
+  "Communication & Language Arts": { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "Communication & Language Arts requires any three Arts or Social Sciences subjects." },
+  "Creative Arts":             { required: [], pool: ALL_POOL, msg: "Creative Arts requires any one of Fine Art, Literature in English or Music, one Arts subject and any Science or Social Sciences." },
+  "Fine Art":                  { required: [], pool: ALL_POOL, msg: "Fine Art requires any one of Fine Art, Literature in English or Music, one Arts subject and any Science or Social Sciences." },
+  "Music":                     { required: [], pool: ALL_POOL, msg: "Music requires any combination from Arts — Music recommended." },
+  "English Language":          { required: ["Literature in English"], pool: ["Literature in English","Christian Religious Studies / Islamic Religious Studies","French","History","Government","Yoruba","Igbo","Hausa","Arabic"], msg: "English Language requires Literature in English and any two of CRS/IRS, French, History, Government or any Nigerian Language." },
+  "French":                    { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "French requires any three Arts or Social Sciences subjects." },
+  "Russian":                   { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "Russian requires any three Arts or Social Sciences subjects." },
+  "German":                    { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "German requires any three Arts or Social Sciences subjects." },
+  "Portuguese":                { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "Portuguese requires any three Arts or Social Sciences subjects." },
+  "Spanish":                   { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "Spanish requires any three Arts or Social Sciences subjects." },
+  "History & Strategic Studies":{ required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "History & Strategic Studies requires History and/or Government plus any Arts or Social Sciences." },
+  "Linguistics & African Languages": { required: [], pool: ALL_POOL, msg: "Linguistics accepts any three subjects from Arts, Sciences or Social Sciences." },
+  "Philosophy":                { required: [], pool: ALL_POOL, msg: "Philosophy requires at least one Arts subject and any two from Arts, Social Sciences or Sciences." },
+  "Christian Religious Studies":{ required: ["Christian Religious Studies / Islamic Religious Studies"], pool: ["Christian Religious Studies / Islamic Religious Studies","Literature in English","History","Government","French","Yoruba","Igbo","Hausa","Economics","Commerce"], msg: "Christian Religious Studies requires CRS/IRS and any two of Literature, History, Government, French, Yoruba, Igbo, Hausa, Economics or Commerce." },
+  "Islamic Studies":           { required: ["Christian Religious Studies / Islamic Religious Studies"], pool: ["Christian Religious Studies / Islamic Religious Studies","Literature in English","History","Government","French","Yoruba","Igbo","Arabic","Economics","Commerce"], msg: "Islamic Studies requires Islamic Studies/IRS and any two of Literature, History, Government, French, Yoruba, Igbo, Economics or Commerce." },
+
+  // ── BASIC MEDICAL SCIENCES & CLINICAL ─
+  "Physiology":                { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Physiology requires Biology, Chemistry and Physics." },
+  "Medical Laboratory Science":{ required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Medical Laboratory Science requires Biology, Chemistry and Physics." },
+  "Human Anatomy":             { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Anatomy requires Biology, Chemistry and Physics." },
+  "Medicine & Surgery":        { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Medicine & Surgery requires Biology, Chemistry and Physics." },
+  "Nursing Science":           { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Nursing Science requires Biology, Chemistry and Physics." },
+  "Radiography":               { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Radiography requires Biology, Chemistry and Physics." },
+  "Dentistry":                 { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Dentistry requires Biology, Chemistry and Physics." },
+  "Pharmacy":                  { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Pharmacy requires Biology, Chemistry and Physics." },
+
+  // ── ENGINEERING ───────────────────────
+  "Chemical Engineering":      { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Chemical Engineering requires Mathematics, Physics and Chemistry." },
+  "Civil Engineering":         { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Civil Engineering requires Mathematics, Physics and Chemistry." },
+  "Computer Engineering":      { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Computer Engineering requires Mathematics, Physics and Chemistry." },
+  "Electrical & Electronics Engineering": { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Electrical Engineering requires Mathematics, Physics and Chemistry." },
+  "Mechanical Engineering":    { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Mechanical Engineering requires Mathematics, Physics and Chemistry." },
+  "Petroleum & Gas Engineering":{ required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Petroleum Engineering requires Mathematics, Physics and Chemistry." },
+  "Surveying & Geoinformatics": { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Surveying & Geoinformatics requires Mathematics, Physics and Chemistry." },
+  "Systems Engineering":       { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Systems Engineering requires Mathematics, Physics and Chemistry." },
+
+  // ── ENVIRONMENTAL SCIENCES ────────────
+  "Architecture":              { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Geography","Economics","Biology","Fine Art","Technical Drawing"], msg: "Architecture requires Mathematics, Physics and any one of Chemistry, Geography, Economics, Biology or Fine Art." },
+  "Building":                  { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Building requires Mathematics, Physics and Chemistry." },
+  "Estate Management":         { required: ["Mathematics","Economics"], pool: ["Mathematics","Economics","Chemistry","Physics","Biology","Geography","Financial Accounting"], msg: "Estate Management requires Mathematics, Economics and any one of Chemistry, Physics, Biology, Geography or Financial Accounting." },
+  "Quantity Surveying":        { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Economics","Geography"], msg: "Quantity Surveying requires Mathematics, Physics and any one of Chemistry, Economics or Geography." },
+  "Urban & Regional Planning": { required: ["Mathematics"], pool: ["Mathematics","Geography","Economics","Chemistry","Physics","Biology","Fine Art","Technical Drawing"], msg: "Urban & Regional Planning requires Mathematics, Geography/Economics and any one of Chemistry, Physics, Biology, Fine Art or Technical Drawing." },
+
+  // ── LAW ───────────────────────────────
+  "Law":                       { required: [], pool: [...ARTS_POOL,...SOC_POOL], forbidden: ["Music","Fine Art","Financial Accounting"], msg: "Law requires any three Arts or Social Sciences subjects. Music, Fine Art and Financial Accounting are NOT accepted by UNILAG." },
+
+  // ── MANAGEMENT SCIENCES ───────────────
+  "Accounting":                { required: ["Mathematics","Economics"], pool: ["Mathematics","Economics","Financial Accounting","Geography","Government","Literature in English","Biology"], msg: "Accounting requires Mathematics, Economics and one of Financial Accounting, Geography, Government, Literature in English or Biology." },
+  "Insurance":                 { required: ["Mathematics","Economics"], pool: ["Mathematics","Economics","Financial Accounting","Geography","Government","Biology","Chemistry","Physics","Commerce"], msg: "Insurance requires Mathematics, Economics and any one of Financial Accounting, Geography, Government, Biology, Chemistry, Physics or Commerce." },
+  "Actuarial Science":         { required: ["Mathematics","Economics"], pool: ["Mathematics","Economics","Geography","Government","Biology","Chemistry","Physics","Commerce"], msg: "Actuarial Science requires Mathematics, Economics and any one of Geography, Government, Biology, Chemistry, Physics or Commerce." },
+  "Business Administration":   { required: ["Mathematics","Economics"], pool: ALL_POOL, msg: "Business Administration requires Mathematics, Economics and any one other subject." },
+  "Industrial Relations & Personnel Management": { required: ["Mathematics","Economics"], pool: ALL_POOL, msg: "Industrial Relations requires Mathematics, Economics and any one other subject." },
+  "Information Systems":       { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Biology","Economics","Geography"], msg: "Information Systems requires Mathematics, Physics and any one of Chemistry, Biology, Economics or Geography." },
+
+  // ── SCIENCE ───────────────────────────
+  "Biochemistry":              { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Biochemistry requires Biology, Chemistry and Physics." },
+  "Botany":                    { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Botany requires Biology, Chemistry and Physics." },
+  "Cell Biology & Genetics":   { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Cell Biology & Genetics requires Biology, Chemistry and Physics." },
+  "Chemistry":                 { required: ["Chemistry","Physics"], pool: ["Chemistry","Physics","Biology","Mathematics"], msg: "Chemistry requires Chemistry, Physics and any one of Biology or Mathematics." },
+  "Computer Science":          { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Biology"], msg: "Computer Science requires Mathematics, Physics and any one of Chemistry or Biology." },
+  "Environmental Biology":     { required: ["Mathematics"], pool: ["Mathematics","Physics","Chemistry","Biology"], msg: "Environmental Biology requires Mathematics and any two of Physics, Chemistry and Biology." },
+  "Food Science & Technology": { required: ["Biology","Chemistry"], pool: ["Biology","Chemistry","Physics","Mathematics","Agricultural Science"], msg: "Food Science & Technology requires Biology, Chemistry and any one Science subject." },
+  "Geology":                   { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Geology requires Mathematics, Physics and Chemistry." },
+  "Industrial Chemistry":      { required: ["Chemistry","Physics"], pool: ["Chemistry","Physics","Biology","Mathematics"], msg: "Industrial Chemistry requires Chemistry, Physics and any one of Biology or Mathematics." },
+  "Industrial Mathematics":    { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Economics","Biology","Geography"], msg: "Industrial Mathematics requires Mathematics, Physics and any one of Chemistry, Economics, Biology or Geography." },
+  "Marine Biology":            { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Marine Biology requires Biology, Chemistry and Physics." },
+  "Mathematics":               { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Economics","Biology","Geography"], msg: "Mathematics requires Mathematics, Physics and any one of Chemistry, Economics, Biology or Geography." },
+  "Microbiology":              { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Microbiology requires Biology, Chemistry and Physics." },
+  "Physics":                   { required: ["Mathematics","Physics","Chemistry"], pool: ["Mathematics","Physics","Chemistry"], msg: "Physics requires Mathematics, Physics and Chemistry." },
+  "Soil Science":              { required: ["Biology","Chemistry"], pool: ["Biology","Chemistry","Physics","Mathematics","Agricultural Science"], msg: "Soil Science requires Biology, Chemistry and any one of Physics, Mathematics or Agricultural Science." },
+  "Statistics":                { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Economics","Biology","Geography"], msg: "Statistics requires Mathematics, Physics and any one of Chemistry, Economics, Biology or Geography." },
+  "Zoology":                   { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Zoology requires Biology, Chemistry and Physics." },
+  "Veterinary Medicine":       { required: ["Biology","Chemistry","Physics"], pool: ["Biology","Chemistry","Physics"], msg: "Veterinary Medicine requires Biology, Chemistry and Physics." },
+  "Agricultural Science":      { required: ["Biology","Chemistry"], pool: ["Biology","Chemistry","Physics","Mathematics","Agricultural Science"], msg: "Agricultural Science requires Biology, Chemistry and any one of Physics, Mathematics or Agricultural Science." },
+  "Agricultural Economics":    { required: ["Mathematics","Economics"], pool: ["Mathematics","Economics","Biology","Chemistry","Physics","Agricultural Science","Geography"], msg: "Agricultural Economics requires Mathematics, Biology and any one other relevant Science subject." },
+
+  // ── SOCIAL SCIENCES ───────────────────
+  "Economics":                 { required: ["Mathematics","Economics"], pool: ALL_POOL, msg: "Economics requires Mathematics, Economics and any other subject." },
+  "Geography":                 { required: ["Geography"], pool: ["Geography","Biology","Chemistry","Physics","Economics","Government","Mathematics"], msg: "Geography requires Geography and any two of Biology, Chemistry, Physics, Economics, Government or Mathematics." },
+  "Mass Communication":        { required: ["Literature in English"], pool: [...ARTS_POOL,...SOC_POOL], msg: "Mass Communication requires Literature in English and any two Arts or Social Sciences subjects." },
+  "Library & Information Science": { required: ["Literature in English"], pool: [...ARTS_POOL,...SOC_POOL], msg: "Library & Information Science requires Literature in English and any two Arts or Social Sciences subjects." },
+  "Political Science":         { required: ["Government"], pool: ["Government","Economics","Geography","History","Literature in English","Christian Religious Studies / Islamic Religious Studies"], msg: "Political Science requires Government, Economics/Geography and any one of History, Literature in English or CRS/IRS." },
+  "Psychology":                { required: [], forbidden: ["Commerce","Christian Religious Studies / Islamic Religious Studies","Financial Accounting"], pool: ["Mathematics","Biology","Physics","Chemistry","Economics","Government","Literature in English"], msg: "Psychology requires any three of Mathematics, Biology, Physics, Chemistry, Economics, Government or Literature in English. Commerce, CRS/IRS and Financial Accounting are NOT accepted." },
+  "Public Administration":     { required: ["Government","Economics"], pool: [...ARTS_POOL,...SOC_POOL], msg: "Public Administration requires Government/History, Economics and any other Social Sciences or Arts subject." },
+  "International Relations":   { required: ["Government"], pool: ["Government","History","Economics","Geography","Literature in English","Christian Religious Studies / Islamic Religious Studies"], msg: "International Relations requires Government and any two of History, Economics, Geography, Literature or CRS/IRS." },
+  "Social Work":               { required: [], pool: [...ARTS_POOL,...SOC_POOL,"Mathematics"], msg: "Social Work requires two Social Sciences and one Arts subject. Mathematics is accepted." },
+  "Sociology":                 { required: [], pool: [...ARTS_POOL,...SOC_POOL,"Mathematics"], msg: "Sociology requires two Social Sciences and one Arts subject. Mathematics is accepted." },
+
+  // ── EDUCATION ─────────────────────────
+  "Education & Biology":       { required: ["Biology"], pool: ["Biology","Chemistry","Mathematics","Physics","Agricultural Science"], msg: "Biology Education requires Biology and any two of Chemistry, Mathematics, Physics or Agricultural Science." },
+  "Education & Chemistry":     { required: ["Chemistry"], pool: ["Chemistry","Physics","Biology","Agricultural Science"], msg: "Chemistry Education requires Chemistry and any two of Physics, Biology or Agricultural Science." },
+  "Education & Economics":     { required: ["Mathematics","Economics"], pool: ["Mathematics","Economics","Geography","History","Government","Literature in English"], msg: "Education Economics requires Mathematics, Economics and any one of Geography, History/Government or Literature in English." },
+  "Education & English":       { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "English Education requires any three Arts or Social Sciences subjects." },
+  "Education & Mathematics":   { required: ["Mathematics","Physics"], pool: ["Mathematics","Physics","Chemistry","Biology"], msg: "Mathematics Education requires Mathematics, Physics and any one of Chemistry or Biology." },
+  "Education & Physics":       { required: ["Physics","Mathematics"], pool: ["Physics","Mathematics","Chemistry","Biology","Agricultural Science"], msg: "Physics Education requires Physics, Mathematics and one of Biology or Agricultural Science." },
+  "Human Kinetics & Health Education": { required: ["Biology"], pool: ["Biology","Chemistry","Physics","Mathematics","Agricultural Science"], msg: "Human Kinetics requires Biology and any two Science subjects." },
+  "Guidance & Counselling":    { required: [], pool: [...ARTS_POOL,...SOC_POOL], msg: "Guidance & Counselling requires any three Arts or Social Sciences subjects." },
+  "Early Childhood Education": { required: [], pool: ALL_POOL, msg: "Early Childhood Education accepts any three subjects." },
+  "Adult Education":           { required: [], pool: [...ARTS_POOL,...SOC_POOL,"Mathematics","Biology","Agricultural Science","Home Economics"], msg: "Adult & Continuing Education requires any three of Literature, History/Government, French, Geography, Mathematics, Nigerian Language, CRS/IRS, Economics or Commerce." },
+};
+
+/* Attempt tracker */
+let wrongAttempts = 0;
+
+function validateCombination(dept, subjects) {
+  const rule = DEPT_RULES[dept];
+  if (!rule) return { valid: true };
+
+  // Check forbidden
+  if (rule.forbidden) {
+    const bad = subjects.filter(s => rule.forbidden.includes(s));
+    if (bad.length > 0) {
+      return { valid: false, message: bad.join(', ') + ' is not accepted for ' + dept + '. \n' + rule.msg };
+    }
+  }
+
+  // Check required all present
+  const missing = rule.required.filter(r => !subjects.includes(r));
+  if (missing.length > 0) {
+    return { valid: false, message: 'Missing required subject(s): ' + missing.join(', ') + '. \n' + rule.msg };
+  }
+
+  // Check all from valid pool
+  if (rule.pool && rule.pool.length > 0) {
+    const invalid = subjects.filter(s => !rule.pool.includes(s));
+    if (invalid.length > 0) {
+      return { valid: false, message: invalid.join(', ') + ' is not valid for ' + dept + '. \n' + rule.msg };
+    }
+  }
+
+  return { valid: true };
+}
+
+/* DEPT SELECT */
+function initDept() {
+  const list = document.getElementById('dept-list');
+  DEPTS.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'ss-opt'; el.textContent = d; el.dataset.val = d;
+    el.addEventListener('click', () => pickDept(d));
+    list.appendChild(el);
+  });
+  document.getElementById('dept-display').addEventListener('click', toggleDept);
+  document.getElementById('dept-search').addEventListener('input', filterDept);
+  document.addEventListener('click', e => {
+    if (!document.getElementById('dept-wrap').contains(e.target)) closeDept();
+  });
+}
+function toggleDept() {
+  document.getElementById('dept-wrap').classList.toggle('open');
+  if (document.getElementById('dept-wrap').classList.contains('open'))
+    setTimeout(() => document.getElementById('dept-search').focus(), 50);
+}
+function closeDept() { document.getElementById('dept-wrap').classList.remove('open'); }
+function pickDept(d) {
+  selectedDept = d;
+  document.getElementById('dept-display').value = d;
+  document.getElementById('f-dept').value = d;
+  document.querySelectorAll('.ss-opt').forEach(o => o.classList.toggle('selected', o.dataset.val === d));
+  closeDept();
+}
+function filterDept() {
+  const q = document.getElementById('dept-search').value.toLowerCase();
+  let any = false;
+  document.querySelectorAll('.ss-opt').forEach(o => {
+    const show = o.textContent.toLowerCase().includes(q);
+    o.classList.toggle('hidden', !show);
+    if (show) any = true;
+  });
+  document.getElementById('dept-empty').style.display = any ? 'none' : 'block';
+}
+
+/* SUBJECT PICKER */
+function initSubjects() {
+  const grid = document.getElementById('subj-grid');
+  JAMB_SUBJECTS.forEach(s => {
+    const chip = document.createElement('div');
+    chip.className = 's-chip'; chip.dataset.sub = s;
+    chip.innerHTML = `<div class="chip-box"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg></div><span>${s}</span>`;
+    chip.addEventListener('click', () => toggleSubject(s, chip));
+    grid.appendChild(chip);
+  });
+  document.getElementById('subj-search').addEventListener('input', filterSubjects);
+}
+function toggleSubject(s, chip) {
+  if (chip.classList.contains('selected')) {
+    selectedSubjects = selectedSubjects.filter(x => x !== s);
+    chip.classList.remove('selected');
+  } else {
+    if (selectedSubjects.length >= 3) { showToast('You can only select 3 subjects', true); return; }
+    selectedSubjects.push(s);
+    chip.classList.add('selected');
+  }
+  document.getElementById('subj-count').textContent = selectedSubjects.length;
+  document.querySelectorAll('.s-chip:not(.selected)').forEach(c => {
+    c.classList.toggle('disabled', selectedSubjects.length >= 3);
+  });
+}
+function filterSubjects() {
+  const q = document.getElementById('subj-search').value.toLowerCase();
+  document.querySelectorAll('.s-chip').forEach(c => {
+    c.classList.toggle('hidden', !c.dataset.sub.toLowerCase().includes(q));
+  });
+}
+
+/* MODAL */
+function showModal(data) {
+  document.getElementById('m-name').textContent = data.name;
+  document.getElementById('m-jamb').textContent = data.jamb.toUpperCase();
+  document.getElementById('m-dept').textContent = data.dept;
+
+  // Filter out Maths if student selected it (it's already in fixed 25)
+  const varSubjects = data.subjects;
+  const mathsInJamb = data.subjects.includes("Mathematics");
+
+  // Build variable subjects block
+  const varContainer = document.getElementById('m-var-subjects');
+  varContainer.innerHTML = '';
+  const qPerSubject = 5;
+
+  varSubjects.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'combo-row variable';
+    row.innerHTML = `<div class="combo-num">${i + 4}</div><span>${s}</span>`;
+    varContainer.appendChild(row);
+  });
+
+  // Badge
+  document.getElementById('m-var-badge').textContent = '15 Questions';
+
+  // Note
+  let noteText = `<strong>English Language, Mathematics and General Knowledge</strong> — 25 questions total. The remaining <strong>15 questions</strong> will come from your UTME subjects — <strong>5 questions each</strong>.`;
+  if (mathsInJamb) {
+    noteText += ` <strong>Note:</strong> Since you wrote Mathematics in JAMB, you will answer Mathematics questions in both sections — giving you a total of approximately <strong>13-14 Mathematics questions</strong> across the full 40-question paper.`;
+  }
+  
+  document.getElementById('m-note').innerHTML = noteText;
+
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('overlay')) closeModal();
+});
+
+/* TOAST */
+function showToast(msg, err) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast' + (err ? ' err' : '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+/* SUBMIT */
+function handleSubmit() {
+  const name     = document.getElementById('f-name').value.trim();
+  const jamb     = document.getElementById('f-jamb').value.trim();
+  const whatsapp = document.getElementById('f-whatsapp').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+
+  if (!name)     { showToast('Please enter your full name', true); return; }
+  if (!jamb)     { showToast('Please enter your JAMB registration number', true); return; }
+  if (!selectedDept) { showToast('Please select your department', true); return; }
+  if (!whatsapp) { showToast('Please enter your WhatsApp number', true); return; }
+  if (!email)    { showToast('Please enter your email address', true); return; }
+  if (!/\S+@\S+\.\S+/.test(email)) { showToast('Please enter a valid email address', true); return; }
+  if (selectedSubjects.length !== 3) { showToast('Please select your 3 UTME subjects', true); return; }
+
+  // Validate subject combination against department rules
+  const validation = validateCombination(selectedDept, selectedSubjects);
+  if (!validation.valid) {
+    wrongAttempts++;
+    if (wrongAttempts >= 5) {
+      showToast('Too many incorrect attempts. Message EAC on WhatsApp for help: 09136379483', true);
+      setTimeout(() => window.open('https://wa.me/2349136379483', '_blank'), 2500);
+      wrongAttempts = 0;
+    } else {
+      showToast('Wrong combination! ' + validation.message, true);
+    }
+    return;
+  }
+  wrongAttempts = 0;
+
+  const btn = document.getElementById('btn-submit');
+  btn.classList.add('loading');
+
+  const mathsInJamb = selectedSubjects.includes('Mathematics');
+  const mathsNote = mathsInJamb
+    ? 'Note: Since you wrote Mathematics in JAMB, you will answer Mathematics questions in both sections — approximately 13-14 Mathematics questions across the full 40-question paper.'
+    : '';
+
+  emailjs.send('service_5nspdvm', 'template_f5do7b1', {
+    student_name:    name,
+    student_email:   email,
+    student_jamb:    jamb.toUpperCase(),
+    student_dept:    selectedDept,
+    student_whatsapp: whatsapp,
+    subject_1:       selectedSubjects[0],
+    subject_2:       selectedSubjects[1],
+    subject_3:       selectedSubjects[2],
+    maths_note:      mathsNote,
+  }).catch(err => console.warn('EmailJS error:', err));
+
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    showModal({ name, jamb, dept: selectedDept, whatsapp, email, subjects: selectedSubjects });
+  }, 1000);
+}
+
+const EMAILJS_PUBLIC_KEY = 'kbxo3tsW3xu2ziNxZ';
+
+initDept();
+initSubjects();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('kbxo3tsW3xu2ziNxZ');</script>
+</body>
+</html>
